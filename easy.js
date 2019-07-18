@@ -7,11 +7,14 @@ let yValue = 0;
 // I suggest using an array of objects but feel free to change that
 // An example of a puzzle piece object could be: { name: ".box1", x: 0, y: 0 }
 **********************************/
+//Array Variables for puzzle pieces and another one to check for winner in isFinished fucntion
 const puzzlePieces = [];
 const comapredResult = [];
 
+//Selecting all divs
 const piecesData = document.querySelectorAll("div");
 
+//Adding the pieces to puzzlepieces array
 for (i = 0; i < piecesData.length; i++) {
   if (i < 4) {
     let piece = "." + piecesData[i].className;
@@ -102,6 +105,7 @@ const puzzle = {
         blankSpace.x += 100;
         break;
     }
+    //Creating new timeline to execute isfinished after animation ends
     var t1 = new TimelineMax();
 
     // v1.to(this.currentPiece, 0.17, {
@@ -114,6 +118,7 @@ const puzzle = {
       x: this.pieces[this.currentPiece.dataset.idx].x,
       y: this.pieces[this.currentPiece.dataset.idx].y,
       ease: Power0.easeNone,
+      //Binding is finished to puzzle object and executing it after animation completes
       onComplete: this.isFinished.bind(puzzle)
     });
   },
@@ -180,6 +185,7 @@ const puzzle = {
     //   return "";
     // }
   },
+  //Funtion to check if the puzzle is solved and display winner alert
   isFinished: function() {
     let result = [];
     this.pieces.forEach(element => {
@@ -191,10 +197,5 @@ const puzzle = {
   }
 };
 
+//Initializing the puzzle
 puzzle.initialize();
-
-/* 
-STEP 5 - Comment each function implemented
-STEP 6 - Submit to github
-STEP 7 - host on web server
-*/
